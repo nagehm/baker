@@ -17,8 +17,9 @@
         --card-bg: #ffffff;
         --sidebar-bg: #f8f9fa;
         --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        --transition: none; /* تم الاحتفاظ بـ 'none' لتحسين الأداء */
+        --transition: none;
         --sidebar-width: 280px;
+        --font-btn-color: var(--text-color); 
     }
 
     .dark-mode {
@@ -33,13 +34,8 @@
         --sidebar-bg: #1a1a1a;
         --shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         --transition: none;
-        --menu-item-color: #f8f9fa; /* تم الاحتفاظ بهذا لتحسين وضوح الشريط الجانبي */
-        --font-btn-color: white; /* لون حرف A في الوضع الليلي */
-    }
-    
-    /* لون حرف A الافتراضي (الوضع العادي) */
-    :root {
-        --font-btn-color: var(--text-color);
+        --menu-item-color: #f8f9fa; 
+        --font-btn-color: white; 
     }
 
     * {
@@ -56,18 +52,20 @@
         color: var(--text-color);
         line-height: 1.6;
         direction: rtl;
+        /* تم ترك الخلفية المدمجة كما هي */
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f8ff"/><circle cx="20" cy="20" r="15" fill="%23ffd700" opacity="0.7"/></svg>');
         background-size: cover;
         -webkit-font-smoothing: antialiased;
         -webkit-overflow-scrolling: touch;
     }
     
-    /* 2. Cairo Bold للعناوين */
+    /* 2. تعديل الخطوط للعناوين للعودة لخطوط النظام الآمنة (بدلاً من كايرو الخارجي) */
     .header h1, 
     .header .subtitle,
     .prayer-title,
     .psalm-title {
-        font-family: 'Cairo', Arial, sans-serif;
+        /* تم استبدال 'Cairo' بخطوط نظام آمنة وثقيلة المظهر تدعم العربية */
+        font-family: Tahoma, 'Trebuchet MS', Arial, sans-serif; 
         font-weight: 700;
     }
 
@@ -202,7 +200,6 @@
         color: var(--text-color);
     }
     
-    /* 3. وضوح نص الشريط الجانبي في الوضع الليلي */
     .dark-mode .menu-item {
         color: var(--menu-item-color);
     }
@@ -343,7 +340,7 @@
         padding: 10px 16px;
         border-radius: 25px;
         cursor: pointer;
-        font-family: 'Cairo', sans-serif;
+        font-family: Arial, sans-serif; /* تغيير كايرو لـ Arial هنا للأمان */
         font-weight: 600;
         box-shadow: var(--shadow);
         transition: all 0.1s ease;
@@ -379,11 +376,9 @@
         font-weight: bold;
         transition: all 0.1s ease;
         touch-action: manipulation;
-        /* استخدام المتغير لتحديد اللون (اللون الأسود في الوضع العادي) */
         color: var(--font-btn-color); 
     }
     
-    /* 🎯 التعديل 4: تثبيت لون حرف A في الوضع الليلي على الأبيض */
     .dark-mode .font-btn {
         color: var(--font-btn-color); 
     }
@@ -397,7 +392,6 @@
         transform: scale(0.95);
     }
 
-    /* 🎯 التعديل 5: تغيير حجم الحرف A ليعكس حجم الخط */
     .font-btn[data-font-size="small"] {
         font-size: 0.8rem;
     }
@@ -498,7 +492,6 @@
             height: 34px;
         }
 
-        /* تعديل حجم A في الجوال */
         .font-btn[data-font-size="small"] {
             font-size: 0.7rem;
         }
@@ -1017,4 +1010,5 @@
 </body>
 
 </html>
+
 
