@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>صلاة الساعة السادسة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
+ <style>
+    /* تم إلغاء كود alternate-section لأنه لم يعد مطلوباً */
+    
     :root {
-        --primary-color: #2c5aa0;
-        --secondary-color: #4a86e8;
-        --accent-color: #ff9d00;
+        --primary-color: #2c5aa0; /* أزرق داكن */
+        --secondary-color: #4a86e8; /* أزرق فاتح */
+        --accent-color: #ff9d00; /* برتقالي مميز */
         --light-color: #f8f9fa;
         --dark-color: #343a40;
         --text-color: #333;
@@ -19,6 +21,7 @@
         --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         --transition: none; /* تم الاحتفاظ بـ 'none' لتحسين الأداء */
         --sidebar-width: 280px;
+        --font-btn-color: var(--text-color); /* لون حرف A الافتراضي */
     }
 
     .dark-mode {
@@ -33,13 +36,16 @@
         --sidebar-bg: #1a1a1a;
         --shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         --transition: none;
-        --menu-item-color: #f8f9fa; /* تم الاحتفاظ بهذا لتحسين وضوح الشريط الجانبي */
+        --menu-item-color: #f8f9fa;
         --font-btn-color: white; /* لون حرف A في الوضع الليلي */
     }
     
-    /* لون حرف A الافتراضي (الوضع العادي) */
+    /* 💥 متغيرات RGB للمساعدة في التعديل */
     :root {
-        --font-btn-color: var(--text-color);
+        --primary-color-rgb: 44, 90, 160;
+    }
+    .dark-mode {
+        --primary-color-rgb: 74, 134, 232;
     }
 
     * {
@@ -47,6 +53,7 @@
         padding: 0;
         box-sizing: border-box;
         -webkit-tap-highlight-color: transparent;
+        transition: var(--transition); /* تأكيد استخدام خاصية None */
     }
 
     /* 1. Arial Bold للنص الرئيسي */
@@ -62,12 +69,12 @@
         -webkit-overflow-scrolling: touch;
     }
     
-    /* 2. Cairo Bold للعناوين */
+    /* 2. خطوط النظام الآمنة للعناوين (بديلاً عن كايرو الخارجي) */
     .header h1, 
     .header .subtitle,
     .prayer-title,
     .psalm-title {
-        font-family: 'Cairo', Arial, sans-serif;
+        font-family: Tahoma, 'Trebuchet MS', Arial, sans-serif; 
         font-weight: 700;
     }
 
@@ -202,7 +209,6 @@
         color: var(--text-color);
     }
     
-    /* 3. وضوح نص الشريط الجانبي في الوضع الليلي */
     .dark-mode .menu-item {
         color: var(--menu-item-color);
     }
@@ -239,17 +245,26 @@
         display: block;
     }
 
-    .main-content {
-        /* لا انتقال */
-    }
-
+    /* 💥 تعديل الكارد (البلوكة) - التغيير الجوهري */
     .prayer-section {
         margin-bottom: 25px;
         padding: 20px;
         background-color: var(--card-bg);
-        border-radius: 12px;
-        box-shadow: var(--shadow);
-        /* لا انتقال */
+        border-radius: 16px; /* زيادة الاستدارة */
+        
+        /* إطار خفيف وواضح بلون Primary Color */
+        border: 1px solid rgba(var(--primary-color-rgb), 0.15); 
+        
+        /* ظل بارز وناعم */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
+                    0 0 0 1px rgba(0, 0, 0, 0.03); 
+    }
+
+    .dark-mode .prayer-section {
+        /* إطار أزرق فاتح خفيف في الوضع الليلي */
+        border: 1px solid rgba(74, 134, 232, 0.1); 
+        /* ظل أبيض خفيف في الوضع الليلي */
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.08); 
     }
 
     .prayer-section:target {
@@ -280,12 +295,13 @@
         word-wrap: break-word;
     }
 
+    /* 💥 تعديل الـ Psalm Title */
     .psalm-title {
-        font-weight: 600;
+        font-weight: 700; /* تم زيادة الوزن ليتوافق مع العناوين الأخرى */
         color: var(--secondary-color);
         margin: 18px 0 10px 0;
-        padding-right: 8px;
-        border-right: 3px solid var(--accent-color);
+        padding-right: 12px; /* زيادة التباعد */
+        border-right: 5px solid var(--accent-color); /* زيادة سمك الشريط البرتقالي لتمييز واضح */
         font-size: 1.1rem;
     }
 
@@ -343,7 +359,7 @@
         padding: 10px 16px;
         border-radius: 25px;
         cursor: pointer;
-        font-family: 'Cairo', sans-serif;
+        font-family: Arial, sans-serif; /* تم تعديله لخطوط النظام الآمنة */
         font-weight: 600;
         box-shadow: var(--shadow);
         transition: all 0.1s ease;
@@ -379,13 +395,11 @@
         font-weight: bold;
         transition: all 0.1s ease;
         touch-action: manipulation;
-        /* استخدام المتغير لتحديد اللون (اللون الأسود في الوضع العادي) */
-        color: var(--font-btn-color); 
+        color: var(--font-btn-color);
     }
     
-    /* 🎯 التعديل 4: تثبيت لون حرف A في الوضع الليلي على الأبيض */
     .dark-mode .font-btn {
-        color: var(--font-btn-color); 
+        color: var(--font-btn-color);
     }
 
     .font-btn.active {
@@ -397,7 +411,6 @@
         transform: scale(0.95);
     }
 
-    /* 🎯 التعديل 5: تغيير حجم الحرف A ليعكس حجم الخط */
     .font-btn[data-font-size="small"] {
         font-size: 0.8rem;
     }
@@ -498,7 +511,6 @@
             height: 34px;
         }
 
-        /* تعديل حجم A في الجوال */
         .font-btn[data-font-size="small"] {
             font-size: 0.7rem;
         }
@@ -974,3 +986,4 @@
     </script>
 </body>
 </html>
+
